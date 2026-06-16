@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 # ─────────────────────────────────────────────
 BASE_URL = "https://daddylive.li/embed/embed.php?id={channel_id}&player={player_id}&source=tv.json"
 CHANNEL_IDS = [63]           # İstediğin kanal ID'lerini ekle
-PLAYER_RANGE = range(1, 11)  # player=1 ... player=10
+PLAYER_RANGE = range(1)  # player=1 ... player=10
 OUTPUT_FILE = "daddylive.m3u"
 TIMEOUT = 30
 
