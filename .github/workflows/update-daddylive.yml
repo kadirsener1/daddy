@@ -1,34 +1,26 @@
-name: Update M3U Link
-
+name: DaddyLive Auto Update
 on:
   schedule:
     - cron: '0 */2 * * *'
   workflow_dispatch:
-
-permissions:
-  contents: write
-
 jobs:
-  run-script:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-          
-      - name: Install Requests
+      - name: Install dependencies
         run: pip install requests
-        
-      - name: Execute Scraper
+      - name: Run Scraper
         run: python update_playlist.py
-        
-      - name: Commit Changes
+      - name: Push Changes
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
+          git config --local user.name "github-actions"
+          git config --local user.email "actions@github.com"
           git add daddylive.m3u
-          git commit -m "Automated m3u8 update" || exit 0
+          git commit -m "Update Link $(date)" || exit 0
           git push
